@@ -1,110 +1,64 @@
--- Group By
--- When you use the GROUP BY clause in a MySQL query, it groups together rows that have the same values in the specified column or columns.
--- GROUP BY is going to allow us to group rows that have the same data and run aggregate functions on them
+-- GROUP BY
+-- Group rows with the same values and run aggregate functions on them
 
 SELECT *
-FROM employee_demographics;
+FROM employees;
 
--- when you use group by  you have to have the same columns you're grouping on in the group by statement
+-- Grouping by gender
 SELECT gender
-FROM employee_demographics
-GROUP BY gender
-;
+FROM employees
+GROUP BY gender;
 
+-- Invalid: Selecting a column not included in GROUP BY without aggregation
+-- Will throw error in strict SQL modes
+-- SELECT first_name FROM employees GROUP BY gender;
 
-SELECT first_name
-FROM employee_demographics
-GROUP BY gender
-;
-
-
-
-
-
+-- Grouping occupations
 SELECT occupation
 FROM employee_salary
-GROUP BY occupation
-;
+GROUP BY occupation;
 
--- notice there is only one office manager row
-
--- when we group by 2 columns we now have a row for both occupation and salary because salary is different
+-- Grouping by occupation and salary (to see variations)
 SELECT occupation, salary
 FROM employee_salary
-GROUP BY occupation, salary
-;
+GROUP BY occupation, salary;
 
--- now the most useful reason we use group by is so we can perform out aggregate functions on them
+-- Aggregate functions grouped by gender
 SELECT gender, AVG(age)
-FROM employee_demographics
-GROUP BY gender
-;
+FROM employees
+GROUP BY gender;
 
-SELECT gender, MIN(age), MAX(age), COUNT(age),AVG(age)
-FROM employee_demographics
-GROUP BY gender
-;
+SELECT gender, MIN(age), MAX(age), COUNT(age), AVG(age)
+FROM employees
+GROUP BY gender;
 
 
 
-#10 - The ORDER BY clause:
--------------------------
-#The ORDER BY keyword is used to sort the result-set in ascending or descending order.
+-- ORDER BY
+-- Sort result-set in ascending (default) or descending (DESC) order
 
-#The ORDER BY keyword sorts the records in ascending order by default. To sort the records in descending order, use the DESC keyword.
-
-
-#So let's try it out with our customer table
-#First let's start simple with just ordering by one column
+-- Order employees by first name (ascending)
 SELECT *
-FROM customers
+FROM employees
 ORDER BY first_name;
 
-#You can see that first name is ordered from a - z or Ascending.
-
-#We can change that by specifying DESC after it
+-- Order by first name (descending)
 SELECT *
-FROM employee_demographics;
-
--- if we use order by it goes a to z by default (ascending order)
-SELECT *
-FROM employee_demographics
-ORDER BY first_name;
-
--- we can manually change the order by saying desc
-SELECT *
-FROM employee_demographics
+FROM employees
 ORDER BY first_name DESC;
 
-#Now we can also do multiple columns like this:
-
+-- Order by gender and then age (ascending)
 SELECT *
-FROM employee_demographics
+FROM employees
 ORDER BY gender, age;
 
+-- Order by gender and age (both descending)
 SELECT *
-FROM employee_demographics
+FROM employees
 ORDER BY gender DESC, age DESC;
 
-
-
-#now we don't actually have to spell out the column names. We can actually just use their column position
-
-#State is in position 8 and money is in 9, we can use those as well.
+-- Using column positions instead of names (not recommended)
+-- Column 5 = gender, Column 4 = age (as per structure)
 SELECT *
-FROM employee_demographics
+FROM employees
 ORDER BY 5 DESC, 4 DESC;
-
-#Now best practice is to use the column names as it's more overt and if columns are added or replaced or something in this table it will still use the right columns to order on.
-
-#So that's all there is to order by - fairly straight forward, but something I use for most queries I use in SQL
-
-
-
-
-
-
-
-
-
-
