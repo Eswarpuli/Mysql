@@ -1,70 +1,45 @@
-#WHERE Clause:
-#-------------
-#The WHERE clause is used to filter records (rows of data)
+-- WHERE Clause:
+-- -------------
+-- The WHERE clause is used to filter rows of data based on conditions.
 
-#It's going to extract only those records that fulfill a specified condition.
-
-# So basically if we say "Where name is = 'Alex' - only rows were the name = 'Alex' will return
-# So this is only effecting the rows, not the columns
-
-
-#Let's take a look at how this looks
+-- Return rows where salary is greater than 50000
 SELECT *
 FROM employee_salary
 WHERE salary > 50000;
 
+-- Return rows where salary is greater than or equal to 50000
 SELECT *
 FROM employee_salary
 WHERE salary >= 50000;
 
+-- Return only female employees
 SELECT *
-FROM employee_demographics
+FROM employees
 WHERE gender = 'Female';
 
-
-#We can also return rows that do have not "Scranton"
+-- Return only non-female employees
 SELECT *
-FROM employee_demographics
+FROM employees
 WHERE gender != 'Female';
 
-
-#We can use WHERE clause with date value also
+-- Use WHERE clause with a date value
 SELECT *
-FROM employee_demographics
+FROM employees
 WHERE birth_date > '1985-01-01';
 
--- Here '1990-01-01' is the default data formate in MySQL.
--- There are other date formats as well that we will talk about in a later lesson.
+-- LIKE STATEMENT
 
-
-# LIKE STATEMENT
-
--- two special characters a % and a _
-
--- % means anything
+-- % means anything after 'a' (e.g., Alice, Andy, etc.)
 SELECT *
-FROM employee_demographics
+FROM employees
 WHERE first_name LIKE 'a%';
 
--- _ means a specific value
+-- _ means exactly 3 letters, starting with 'a' (e.g., Amy, Ann, etc.)
 SELECT *
-FROM employee_demographics
+FROM employees
 WHERE first_name LIKE 'a__';
 
-
+-- First letter 'a', followed by 3 or more characters (e.g., April, Aaron)
 SELECT *
-FROM employee_demographics
+FROM employees
 WHERE first_name LIKE 'a___%';
-
-
-
-
-
-
-
-
-
-
-
-
-
