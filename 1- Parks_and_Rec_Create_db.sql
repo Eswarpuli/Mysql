@@ -1,13 +1,12 @@
-DROP DATABASE IF EXISTS `Parks_and_Recreation`;
-CREATE DATABASE `Parks_and_Recreation`;
-USE `Parks_and_Recreation`;
+-- Drop the old database if it exists
+DROP DATABASE IF EXISTS `Gec`;
 
+-- Create new database
+CREATE DATABASE `Gec`;
+USE `Gec`;
 
-
-
-
-
-CREATE TABLE employee_demographics (
+-- Create employees table (was employee_demographics)
+CREATE TABLE employees (
   employee_id INT NOT NULL,
   first_name VARCHAR(50),
   last_name VARCHAR(50),
@@ -17,6 +16,7 @@ CREATE TABLE employee_demographics (
   PRIMARY KEY (employee_id)
 );
 
+-- Create employee_salary table (same name)
 CREATE TABLE employee_salary (
   employee_id INT NOT NULL,
   first_name VARCHAR(50) NOT NULL,
@@ -26,8 +26,8 @@ CREATE TABLE employee_salary (
   dept_id INT
 );
 
-
-INSERT INTO employee_demographics (employee_id, first_name, last_name, age, gender, birth_date)
+-- Insert data into employees
+INSERT INTO employees (employee_id, first_name, last_name, age, gender, birth_date)
 VALUES
 (1,'Leslie', 'Knope', 44, 'Female','1979-09-25'),
 (3,'Tom', 'Haverford', 36, 'Male', '1987-03-04'),
@@ -41,7 +41,7 @@ VALUES
 (11, 'Mark', 'Brendanawicz', 40, 'Male', '1983-06-14'),
 (12, 'Craig', 'Middlebrooks', 37, 'Male', '1986-07-27');
 
-
+-- Insert data into employee_salary
 INSERT INTO employee_salary (employee_id, first_name, last_name, occupation, salary, dept_id)
 VALUES
 (1, 'Leslie', 'Knope', 'Deputy Director of Parks and Recreation', 75000,1),
@@ -57,15 +57,15 @@ VALUES
 (11, 'Mark', 'Brendanawicz', 'City Planner', 57000, 3),
 (12, 'Craig', 'Middlebrooks', 'Parks Director', 65000,1);
 
-
-
-CREATE TABLE parks_departments (
+-- Create department table (was parks_departments)
+CREATE TABLE department (
   department_id INT NOT NULL AUTO_INCREMENT,
   department_name varchar(50) NOT NULL,
   PRIMARY KEY (department_id)
 );
 
-INSERT INTO parks_departments (department_name)
+-- Insert data into department
+INSERT INTO department (department_name)
 VALUES
 ('Parks and Recreation'),
 ('Animal Control'),
@@ -73,16 +73,3 @@ VALUES
 ('Healthcare'),
 ('Library'),
 ('Finance');
-
-
-
-
-
-
-
-
-
-
-
-
-
